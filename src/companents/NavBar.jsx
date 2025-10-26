@@ -304,7 +304,7 @@ const NavBar = () => {
       </NavList>
       <div className="FMBtn" >
             <FMButton  onClick={toggleFM} data-aos="fade-left" data-aos-duration="1500" data-aos-delay="300">
-          {isPlaying ? "The Deep FM On" : "The Deep FM"}
+          {isPlaying ? "Deep FM On" : "Deep FM"}
         </FMButton>
 
 </div>

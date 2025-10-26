@@ -1,4 +1,50 @@
 .Page{
     margin-top:80px;
     
+}/* Loader styles */
+.loading-screen .cursor {
+  display: inline-block;
+  margin-left: 6px;
+  opacity: 1;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+
+.granted-wrap {
+  transform: translateY(0);
+  animation: slideUpFade .5s ease both;
+}
+
+.granted-line {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #ffffff; /* neon green */
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.25),
+    0 0 18px rgba(255, 255, 255, 0.12);
+  letter-spacing: 3px;
+  animation: pulseGlow 1s ease-in-out;
+}
+
+/* kichik slide/fade in */
+@keyframes slideUpFade {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* pulsing glow efekt */
+@keyframes pulseGlow {
+  0% { text-shadow: 0 0 2px rgba(255, 255, 255, 0.12); transform: scale(0.98); }
+  50% { text-shadow: 0 0 14px rgba(255, 255, 255, 0.35); transform: scale(1.02); }
+  100% { text-shadow: 0 0 6px rgba(255, 255, 255, 0.2); transform: scale(1); }
+}
+
+/* responsive kichik o'lchamlar uchun */
+@media (max-width: 600px) {
+  .loading-screen { font-size: 1.2rem !important; padding: 1rem; }
+  .granted-line { font-size: 1.4rem; }
 }

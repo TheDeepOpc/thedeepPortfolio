@@ -44,7 +44,7 @@ className='texts'
 
   <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>username:</span> TheDeep</p>
   <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>fullname:</span> Sardor Shoakbarov</p>
-  <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>role:</span> MERN Stack Developer / Ethical Hacker</p>
+  <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>role:</span> Software Engineer / Ethical Hacker</p>
   <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>status:</span> Signal Lost</p>
   <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>location:</span> Undetected</p>
   <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>threat level:</span> Medium</p>
