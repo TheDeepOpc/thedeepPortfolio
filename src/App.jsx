@@ -2,8 +2,19 @@ import { useState } from 'react'
 import './App.css'
 import NavBar from './companents/NavBar'
 import Photo from './assets/photo.jpeg'
+import { FaDownload } from 'react-icons/fa'
 function App() {
-  const [count, setCount] = useState(0)
+
+
+  const handleDownload = () => {
+    const fileUrl = '/files/Resume.pdf';
+    const fileName = 'Resume.pdf';
+
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = fileName;
+    link.click();
+  };
 
   return (
     <>
@@ -38,12 +49,17 @@ className='texts'
   <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>location:</span> Undetected</p>
   <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>threat level:</span> Medium</p>
   <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>mission:</span> Undetected</p>
+  <p><span style={{  fontWeight: '700', minWidth: '140px' ,textShadow: '0 0 6px #fff, 0 0 12px rgba(0,255,255,0.2)' }}>Data:</span> Available to Download</p>
+   <button onClick={handleDownload} className='ResumeBtn'>
+
+    <p>Data Available<FaDownload/></p>
+   </button>
 </div>
 
       </div>  
 <div  data-aos="fade-up" data-aos-duration="3000"  data-aos-delay="600"  className="col-lg-6">
 
-        <div  className="photo mt-5">
+        <div className="photo">
        <img  src={Photo} alt="" />
         </div>  
      

@@ -32,26 +32,25 @@ body {
     margin-left: 20px;
 }
 
-.Hamburger .container .photo img {
-    margin-top: 100px;
-}
 
 .photo {
     width: 600px;
     height: 600px;
-    transition: .5s !important;
+    background-color: red;
     overflow: hidden;
+    margin-top: 170px;
     border-radius: 30px;
 }
 
 .photo img {
-    width: 600px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s cubic-bezier(0.100, 0.202, 0.365, 1);
 }
 
 /* Hover effekti */
 .photo:hover img {
-    transition: 2s;
     width: 200%;
     height: 100%;
     filter: contrast(2);
@@ -64,17 +63,20 @@ body {
 }
 
 .texts p span {
-display: inline-block;
+    display: inline-block;
 }
+
 @media (max-width: 992px) {
     .photo {
         width: 450px;
         height: 450px;
         border-radius: 25px;
     }
-.texts p span {
-display:contents;
-}
+
+    .texts p span {
+        display: contents;
+    }
+
     .photo img {
         width: 450px;
         height: 450px;
@@ -142,4 +144,32 @@ display:contents;
     .Hamburger .container .row p {
         font-size: 12px;
     }
+}
+
+
+
+.Hamburger .container .row .ResumeBtn {
+    height: 50px;
+    width: 200px;
+    margin-top: 20px;
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    transition: .3s;
+}
+
+.Hamburger .container .row .ResumeBtn:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.Hamburger .container .row .ResumeBtn p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    gap: 10px;
 }
