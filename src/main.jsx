@@ -5,7 +5,6 @@ import App from './App.jsx'
 import About from './pages/About.jsx'
 import Cert from './pages/Cert.jsx'
 import Contact from './pages/Contact.jsx'
-import Resume from './pages/Resume.jsx'
 import AOS from "aos"
 import "aos/dist/aos.css"
 import Skills from './pages/Skills.jsx'
@@ -107,9 +106,8 @@ function RootApp() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/about" element={<About />} />
-        <Route path="/cert" element={<Cert />} />
+        <Route path="/certificates" element={<Cert />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/resume" element={<Resume />} />
         <Route path="/skills" element={<Skills />} />
       </Routes>
     </BrowserRouter>

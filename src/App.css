@@ -17,7 +17,7 @@ body {
 }
 
 .Hamburger .container .row h1 {
-    margin-top: 30vh;
+    margin-top: 20vh;
     font-family: monospace;
     font-size: 35px;
 }
@@ -27,34 +27,10 @@ body {
     font-size: 16px;
 }
 
-.texts {
-    margin-top: 50px;
-    margin-left: 20px;
-}
 
 
-.photo {
-    width: 600px;
-    height: 600px;
-    overflow: hidden;
-    margin-top: 170px;
-    border-radius: 30px;
-}
 
-.photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: .5s cubic-bezier(0.100, 0.202, 0.365, 1);
-}
 
-/* Hover effekti */
-.photo:hover img {
-    width: 200%;
-    height: 100%;
-    filter: contrast(2);
-    object-fit: cover;
-}
 
 /* Scroll yo‘q */
 ::-webkit-scrollbar {
@@ -66,20 +42,12 @@ body {
 }
 
 @media (max-width: 992px) {
-    .photo {
-        width: 450px;
-        height: 450px;
-        border-radius: 25px;
-    }
+ 
 
     .texts p span {
         display: contents;
     }
 
-    .photo img {
-        width: 450px;
-        height: 450px;
-    }
 
     .Hamburger .container .row h1 {
         font-size: 28px;
@@ -102,17 +70,6 @@ body {
         margin-left: 0;
     }
 
-    .photo {
-        width: 350px;
-        height: 350px;
-        margin: 30px auto;
-    }
-
-    .photo img {
-        width: 350px;
-        height: 350px;
-    }
-
     .Hamburger .container .row h1 {
         font-size: 25px;
         margin-top: 10vh;
@@ -124,17 +81,7 @@ body {
 }
 
 @media (max-width: 512px) {
-    .photo {
-        width: 280px;
-        height: 280px;
-        border-radius: 20px;
-    }
-
-    .photo img {
-        width: 280px;
-        height: 280px;
-    }
-
+   
     .Hamburger .container .row h1 {
         font-size: 22px;
         margin-top: 5vh;
@@ -170,5 +117,37 @@ body {
     height: 100%;
     font-size: 16px;
     font-weight: 600;
+
     gap: 10px;
+
+}
+
+/* Umumiy text select effekti */
+::selection {
+color: red;
+background: rgb(0, 0, 0);
+}
+
+/* Firefox uchun (maxsus prefiks kerak) */
+::-moz-selection {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(75, 108, 183, 0.8);
+}
+
+.photoabout img {
+    width: 600px;
+height: 600px;
+    margin-left: 50px;
+border-radius: 10px;
+}
+@media (max-width: 992px) {
+    .photoabout img {
+        width: 100%;
+        padding:10px;
+        height: auto;
+            margin-left:auto;
+
+    }
+
 }

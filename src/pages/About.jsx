@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Shield, Code2, Cpu, Network, Database, Lock } from "lucide-react";
+import '../App.css';
 import Photo from '../assets/photo.jpeg';
 // === Animations ===
 const fadeIn = keyframes`
@@ -153,13 +154,13 @@ export default function About() {
   return (
     <>
       <br /><br />
-      <div className="Page">
+      <div  className="Page">
         <div className="container">
           <div className="row d-flex ">
-            <div className="col-lg-6 w-100 mt-5">
-              <TextBlock>
+            <div className="col-lg-6  mt-5">
+              <TextBlock data-aos="fade" data-aos-duration="1500" data-aos-delay="300">
                 <Title>Sardor Shoakbarov</Title>
-                <Subtitle>Software Engineer | Ethical Hacker | Problem Solver</Subtitle>
+                <Subtitle>Software Engineer | Ethical Hacker | Cyber Security Enthusiast</Subtitle>
                 <Paragraph>
 He designs and develops secure, high-performance web applications while fortifying digital systems against vulnerabilities. His work blends technical precision with creative solutions to deliver reliable and innovative outcomes.                </Paragraph>
                 <InfoGrid>
@@ -207,10 +208,10 @@ With a deep passion for technology and security, he believes that every system h
           
                  </div>
               <div className="col-lg-6">
-                <div data-aos="fade-up" data-aos-duration="3000" data-aos-delay="600" className="col-lg-6">
+                <div className="photoabout mt-5" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="300" >
 
 
-
+<img src={Photo} alt="" />
 
                 </div>
 
