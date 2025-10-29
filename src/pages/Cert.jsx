@@ -1,305 +1,354 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { Award } from "lucide-react";
+import { Award, X } from "lucide-react";
 
-// === Animations ===
+// === Fade Animations ===
 const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-const bookTilt = keyframes`
-  0% { transform: perspective(800px) rotateY(0deg); }
-  50% { transform: perspective(800px) rotateY(10deg); }
-  100% { transform: perspective(800px) rotateY(0deg); }
-`;
-
-const modalFade = keyframes`
-  from { opacity: 0; transform: scale(0.8); }
+  from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 `;
 
-// === Styled Components ===
+const fadeOut = keyframes`
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+`;
+
+// === Layout ===
 const Page = styled.section`
-  background: #0a0a0a;
+  background: #000;
   color: #fff;
   min-height: 100vh;
-  padding: 4rem 1.5rem;
+  padding: 4rem 1rem;
   display: flex;
   justify-content: center;
-  align-items: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 `;
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1100px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
+`;
+
+// === Header ===
+const Header = styled.div`
+  text-align: center;
 `;
 
 const Title = styled.h1`
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 1rem;
-  position: relative;
-  animation: ${fadeIn} 1s ease-out;
-  &:after {
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.5px;
+
+  &::after {
     content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
+    display: block;
+    width: 48px;
     height: 2px;
-    background: #e0e0e0;
+    background: #fff;
+    margin: 0.75rem auto 0;
   }
 `;
 
-const Subtitle = styled.h2`
-  font-size: 1.2rem;
-  color: #b0b0b0;
-  margin-bottom: 2rem;
-  font-weight: 400;
-  text-align: center;
-  max-width: 600px;
-  animation: ${fadeIn} 1.3s ease-out;
+const Subtitle = styled.p`
+  font-size: 1.05rem;
+  color: #bbb;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
 `;
 
-const CertificateGrid = styled.div`
+// === Grid ===
+const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+  width: 100%;
+
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
   }
 `;
 
-const CertificateCard = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  transform: perspective(800px);
-  animation: ${fadeIn} 1.5s ease-out;
+// === Certificate Card ===
+const Card = styled.div`
+  background: #0f0f0f;
+  border: 2px solid #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
   cursor: pointer;
+  transition: border 0.3s ease, transform 0.2s ease;
+  display: flex;
+    flex-direction: column;
+
   &:hover {
-    transform: perspective(800px) translateY(-5px);
-    animation: ${bookTilt} 2s ease-in-out infinite;
+border:2px solid white;  
   }
-  svg {
-    color: #e0e0e0;
-    width: 40px;
-    height: 40px;
-    margin-bottom: 1rem;
-  }
+
   img {
     width: 100%;
-    height: 150px;
+    height: 230px;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    transition: filter 0.3s ease;
   }
-  h3 {
-    font-size: 1.1rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-  p {
-    font-size: 0.9rem;
-    color: #b0b0b0;
-    margin-bottom: 0.5rem;
-  }
-  span {
-    font-size: 0.85rem;
-    color: #b0b0b0;
-    font-style: italic;
-  }
+
+
 `;
 
-const BookSpine = styled.div`
-  position: absolute;
-  left: -2px;
-  top: 0;
-  width: 8px;
-  height: 100%;
-  background: #e0e0e0;
-  border-radius: 4px 0 0 4px;
-  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.2);
+const CardContent = styled.div`
+  padding: 1.25rem;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
-const Modal = styled.div`
+const CardTitle = styled.h3`
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0 0 0.5rem;
+  line-height: 1.4;
+`;
+
+const CardOrg = styled.p`
+  font-size: 0.95rem;
+  color: #ccc;
+  margin: 0 0 0.25rem;
+  font-weight: 500;
+`;
+
+const CardDate = styled.span`
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+`;
+
+// === Modal Overlay (Fade) ===
+const ModalOverlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: ${modalFade} 0.3s ease-out;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+  animation: ${({ isClosing }) => (isClosing ? fadeOut : fadeIn)} 0.3s ease-out forwards;
 `;
 
-const ModalContent = styled.div`
+// === Modal Box ===
+const ModalBox = styled.div`
   background: #0a0a0a;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 800px;
-  width: 90%;
+  border: 1px solid #333;
+  border-radius: 14px;
+  max-width: 750px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    max-width: 80%;
+  }
+
+  @media (max-width: 600px) {
+    max-width: 95%;
+    margin: 1rem;
+  }
+`;
+
+const ModalHeader = styled.div`
+  padding: 1.75rem 2rem 1rem;
+  border-bottom: 1px solid #222;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  img {
-    max-width: 100%;
-    max-height: 500px;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-  }
-  h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-  p {
-    font-size: 1rem;
-    color: #b0b0b0;
-    text-align: center;
-  }
+`;
+
+const ModalTitle = styled.h3`
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  line-height: 1.3;
+  padding-right: 2.5rem;
+`;
+
+const ModalSubtitle = styled.p`
+  font-size: 1rem;
+  color: #aaa;
+  margin: 0.5rem 0 0;
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
+  top: 1.75rem;
+  right: 2rem;
+  background: #222;
   border: none;
-  color: #e0e0e0;
-  font-size: 1.5rem;
+  color: #ccc;
   cursor: pointer;
-  transition: color 0.3s ease;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 10;
+
   &:hover {
-    color: #fff;
+    background: #fff;
+    color: #000;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
   }
 `;
 
-const CTAButton = styled.button`
-  margin-top: 2rem;
-  padding: 0.8rem 2rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #fff;
-  background: transparent;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  animation: ${fadeIn} 1.7s ease-out;
-  &:hover {
-    background: #e0e0e0;
-    color: #0a0a0a;
-  }
+const ModalImage = styled.img`
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  background: #111;
+  padding: 1.5rem;
 `;
 
+const ModalBody = styled.div`
+  padding: 1.5rem 2rem 2rem;
+`;
+
+const ModalDescription = styled.p`
+  font-size: 1.05rem;
+  color: #ddd;
+  line-height: 1.7;
+  margin: 0;
+  text-align: center;
+`;
+
+
+// === Component ===
 export default function Certificates() {
-  const [selectedCert, setSelectedCert] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const openModal = (cert) => {
+    setSelected(cert);
+    setIsClosing(false);
+  };
+
+  const closeModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setSelected(null);
+      setIsClosing(false);
+    }, 300); // Animatsiya tugaguncha kutish
+  };
 
   const certificates = [
     {
       title: "Cisco Ethical Hacker",
-      organization: "Cisco",
+      org: "Cisco",
       date: "2025",
-      description: "Comprehensive knowledge of ethical hacking principles and practices.",
-      image: "src/assets/certs/ethical.jpg",
+      desc: "Certified expertise in ethical hacking methodologies, penetration testing, and vulnerability assessment.",
+      img: "src/assets/certs/ethical.jpg",
     },
     {
       title: "Cisco Linux Essentials",
-      organization: "Cisco",
+      org: "Cisco",
       date: "2025",
-      description: "Fundamental skills in Linux system administration and command-line usage.",
-      image: "src/assets/certs/linuxes.jpg",
+      desc: "Proficiency in Linux command-line operations, system administration, and scripting fundamentals.",
+      img: "src/assets/certs/linuxes.jpg",
     },
     {
       title: "Palo Alto Networks Certified Cybersecurity Practitioner",
-      organization: "Palo Alto Networks",
+      org: "Palo Alto Networks",
       date: "2025",
-      description: "Foundational knowledge in cybersecurity and risk management.",
-      image: "src/assets/certs/panccp.jpg",
+      desc: "Validated skills in cybersecurity fundamentals, risk management, and threat detection strategies.",
+      img: "src/assets/certs/panccp.jpg",
     },
-      {
+    {
       title: "Cisco Introduction to Cybersecurity",
-      organization: "Cisco",
+      org: "Cisco",
       date: "2025",
-      description: "Basic understanding of cybersecurity concepts and best practices.",
-      image: "src/assets/certs/intro.jpg",
+      desc: "Core understanding of cybersecurity principles, attack vectors, and defense mechanisms.",
+      img: "src/assets/certs/intro.jpg",
     },
     {
       title: "Palo Alto Networks Certified Network Security Fundamentals",
-      organization: "Palo Alto Networks",
+      org: "Palo Alto Networks",
       date: "2025",
-      description: "Advanced skills in network security and threat prevention.",
-      image: "src/assets/certs/netsec.jpg",
+      desc: "Advanced knowledge of next-generation firewalls, network segmentation, and secure connectivity.",
+      img: "src/assets/certs/netsec.jpg",
     },
     {
-      title: "Palo Alto Networks  Endpoint Security",
-      organization: "Palo Alto Networks",
+      title: "Palo Alto Networks Endpoint Security",
+      org: "Palo Alto Networks",
       date: "2025",
-      description: "Hands-on expertise in endpoint protection and security management.",
-      image: "src/assets/certs/endpoint.jpg",
+      desc: "Expertise in endpoint protection platforms, behavioral analysis, and incident response.",
+      img: "src/assets/certs/endpoint.jpg",
     },
-   
+    
+    
   ];
 
   return (
-  <div className="Page">
-      <Page>
+ <div className="Page">
+     <Page>
       <Container>
-        <Title>Certificates</Title>
-        <Subtitle>
-          A curated collection of my professional certifications, presented like books in a library.
-        </Subtitle>
-        <CertificateGrid>
-          {certificates.map((cert, index) => (
-            <CertificateCard key={index} onClick={() => setSelectedCert(cert)}>
-              <BookSpine />
-              <img src={cert.image} alt={cert.title} />
-              <Award />
-              <h3>{cert.title}</h3>
-              <p>{cert.organization}</p>
-              <span>{cert.date}</span>
-            </CertificateCard>
+        <Header>
+          <Title>Professional Certificates</Title>
+          <Subtitle>
+            Industry-recognized certifications validating expertise in cybersecurity, networking, and systems administration.
+          </Subtitle>
+        </Header>
+
+        <Grid >
+          {certificates.map((cert, i) => (
+            <Card data-aos="fade-up" data-aos-duration="2000" data-aos-delay={1000 / (2/i)} key={i} onClick={() => openModal(cert)}>
+              <img src={cert.img} alt={cert.title} />
+              <CardContent>
+                <Award size={30} className="mx-auto mb-2 " color="#fff"  />
+                <CardTitle>{cert.title}</CardTitle>
+                <CardOrg>{cert.org}</CardOrg>
+                <CardDate>{cert.date}</CardDate>
+              </CardContent>
+            </Card>
           ))}
-        </CertificateGrid>
-        <CTAButton onClick={() => window.location.href = '#contact'}>
-          Connect for Collaboration
-        </CTAButton>
-        {selectedCert && (
-          <Modal onClick={() => setSelectedCert(null)}>
-            <ModalContent onClick={(e) => e.stopPropagation()}>
-              <CloseButton onClick={() => setSelectedCert(null)}>×</CloseButton>
-              <img src={selectedCert.image} alt={selectedCert.title} />
-              <h3>{selectedCert.title}</h3>
-              <p>{selectedCert.description}</p>
-            </ModalContent>
-          </Modal>
+        </Grid>
+
+   
+
+        {/* Fade Modal */}
+        {selected && (
+          <ModalOverlay isClosing={isClosing} onClick={closeModal}>
+            <ModalBox onClick={(e) => e.stopPropagation()}>
+              <ModalHeader>
+                <CloseButton onClick={closeModal}>
+                  <X />
+                </CloseButton>
+                <ModalTitle>{selected.title}</ModalTitle>
+                <ModalSubtitle>
+                  {selected.org} • {selected.date}
+                </ModalSubtitle>
+              </ModalHeader>
+
+              <ModalImage src={selected.img} alt={selected.title} />
+
+              <ModalBody>
+                <ModalDescription>{selected.desc}</ModalDescription>
+              </ModalBody>
+            </ModalBox>
+          </ModalOverlay>
         )}
       </Container>
     </Page>
-  </div>
+ </div>
   );
 }
