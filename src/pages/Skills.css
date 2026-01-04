@@ -1,0 +1,30 @@
+.techskills{
+
+    
+}
+.techskills{
+ width: 80%;
+    margin: auto;   
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: left;
+
+}
+.techskills h1{
+    text-align: center !important;
+    margin-top: 60px;
+
+    font-family: 'Arsenal', sans-serif;
+}
+.technicalskill p .skillImage{
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    transition: all 0.1s ease-in-out;
+    border-radius: 8px;
+    margin-left: 15px;
+}
+.technicalskill p .skillImage:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.5);
+    transition: all 0.1s ease-in-out;
+}
