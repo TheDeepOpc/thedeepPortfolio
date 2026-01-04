@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { Shield, Code2, Cpu, Network, Database, Lock } from "lucide-react";
+import { Shield, Code2, Cpu, Network, Database, Lock, Target, Zap, Eye, AlertTriangle, Search, Bug } from "lucide-react";
 import '../App.css';
-import Photo from '../assets/photo.jpeg';
+import Photo from '../assets/photo.png';
 // === Animations ===
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(15px); }
@@ -160,50 +160,42 @@ export default function About() {
             <div className="col-lg-6  mt-5">
               <TextBlock data-aos="fade" data-aos-duration="1500" data-aos-delay="300">
                 <Title>Sardor Shoakbarov</Title>
-                <Subtitle>Software Engineer | Ethical Hacker | Cyber Security Enthusiast</Subtitle>
+                <Subtitle>Offensive Security Specialist | Red Team Analyst</Subtitle>
                 <Paragraph>
-He designs and develops secure, high-performance web applications while fortifying digital systems against vulnerabilities. His work blends technical precision with creative solutions to deliver reliable and innovative outcomes.                </Paragraph>
+A dedicated penetration tester with deep expertise in offensive security methodologies, exploit development, and vulnerability research. He excels in network reconnaissance, web application testing, binary exploitation, and post-exploitation techniques using industry-standard tools. His practical approach focuses on identifying real-world attack vectors, developing custom exploits, and providing actionable remediation strategies to strengthen defensive postures against sophisticated threats.                </Paragraph>
                 <InfoGrid>
                   <InfoCard>
-                    <Code2 />
-                    <h3>Web Engineering</h3>
-                    <p>Building scalable and secure web applications with modern frameworks.</p>
+                    <Target />
+                    <h3>Penetration Testing</h3>
+                    <p>Comprehensive network, web, and application penetration testing using industry-standard methodologies.</p>
+                  </InfoCard>
+                  <InfoCard>
+                    <Search />
+                    <h3>Vulnerability Assessment</h3>
+                    <p>Automated and manual vulnerability scanning, risk prioritization, and remediation guidance.</p>
                   </InfoCard>
                   <InfoCard>
                     <Shield />
-                    <h3>Ethical Hacking</h3>
-                    <p>Identifying and mitigating risks to protect digital ecosystems.</p>
+                    <h3>Red Team Operations</h3>
+                    <p>Advanced persistent threat simulation and adversarial attack chain execution.</p>
                   </InfoCard>
                   <InfoCard>
-                    <Cpu />
-                    <h3>AI & Automation</h3>
-                    <p>Creating intelligent tools to streamline processes.</p>
+                    <Bug />
+                    <h3>Exploit Development</h3>
+                    <p>Custom exploit creation, proof-of-concept development, and vulnerability research.</p>
                   </InfoCard>
                   <InfoCard>
-                    <Network />
-                    <h3>Penetration Testing</h3>
-                    <p>Simulating attacks to strengthen system defenses.</p>
+                    <Eye />
+                    <h3>Security Auditing</h3>
+                    <p>Code review, configuration auditing, and compliance assessment against security standards.</p>
                   </InfoCard>
                   <InfoCard>
-                    <Database />
-                    <h3>Data Security</h3>
-                    <p>Ensuring robust protection for sensitive information.</p>
-                  </InfoCard>
-                  <InfoCard>
-                    <Lock />
-                    <h3>Cryptography</h3>
-                    <p>Implementing secure encryption for data integrity.</p>
+                    <AlertTriangle />
+                    <h3>Incident Response</h3>
+                    <p>Digital forensics, malware analysis, and breach investigation services.</p>
                   </InfoCard>
                 </InfoGrid>
-                <HighlightSection>
-                  <h3>The Deepest Thoughts</h3>
-                  <p>
-With a deep passion for technology and security, he believes that every system has a story — one that must be understood before it can be protected. His philosophy is simple: solve complex problems with clarity, responsibility, and precision.                  </p>
-                </HighlightSection>
-                <Quote>
-                  <p>”The Deepest Understanding Comes from Empathy and Insight.”</p>
-                </Quote>
-                
+               
               </TextBlock>
           
                  </div>

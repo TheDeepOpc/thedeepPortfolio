@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink as RRNavLink } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
@@ -188,96 +188,20 @@ const MusicButton = styled.button`
   }
 `;
 
-const FMButton = styled.button`
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    color: #e0e0e0;
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-    animation: ${pulse} 0.5s ease;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    padding: 0.5rem;
-  }
-`;
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState(null);
-  const audioRef = useRef(null);
 
-  // Sample playlist (adjust paths based on your project structure)
-  const playlist = [
-    "/musics/music1.mp3",
-    "/musics/music2.mp3",
-    // Add more songs as needed
-  ];
 
-  // Select a random song
-  const selectRandomSong = () => {
-    const randomIndex = Math.floor(Math.random() * playlist.length);
-    setCurrentSong(playlist[randomIndex]);
-  };
 
-  // Toggle play/pause
-  const togglePlayPause = () => {
-    if (!currentSong) {
-      selectRandomSong();
-    }
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(err => console.error("Playback error:", err));
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
 
-  // FM button toggle (same as togglePlayPause but for clarity)
-  const toggleFM = () => {
-    togglePlayPause();
-  };
-
-  // Play next random song when the current one ends
-  const handleSongEnd = () => {
-    selectRandomSong();
-    setIsPlaying(true);
-  };
-
-  // Update audio source when currentSong changes
-  useEffect(() => {
-    if (currentSong && audioRef.current) {
-      audioRef.current.src = currentSong;
-      if (isPlaying) {
-        audioRef.current.play().catch(err => console.error("Playback error:", err));
-      }
-    }
-  }, [currentSong]);
-
-  // Start with a random song on component mount
-  useEffect(() => {
-    selectRandomSong();
-  }, []);
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <StyledNavbar>
       <NavbarBrand data-aos="fade-right" data-aos-duration="1500" data-aos-delay="300" to="/">
-        <h2 style={{ color: "#fff", fontFamily: "monospace" }}>The Deep</h2>
+        <h2 style={{ color: "#fff", fontFamily: "sans-serif" }}>The Deep</h2>
       </NavbarBrand>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
      
@@ -302,13 +226,7 @@ const NavBar = () => {
         ))}
 
       </NavList>
-      <div className="FMBtn" >
-            <FMButton  onClick={toggleFM} data-aos="fade-left" data-aos-duration="1500" data-aos-delay="300">
-          {isPlaying ? "Deep FM On" : "Deep FM"}
-        </FMButton>
 
-</div>
-      <audio ref={audioRef} onEnded={handleSongEnd} />
     </StyledNavbar>
   );
 };
