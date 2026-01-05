@@ -8,6 +8,8 @@ import Contact from './pages/Contact.jsx'
 import AOS from "aos"
 import "aos/dist/aos.css"
 import Skills from './pages/Skills.jsx'
+import Portfolio from './pages/Portfolio.jsx'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import NavBar from './companents/NavBar.jsx'
@@ -22,6 +24,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/about" element={<About />} />
         <Route path="/certificates" element={<Cert />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+
         <Route path="/contact" element={<Contact />} />
         <Route path="/skills" element={<Skills />} />
       </Routes>

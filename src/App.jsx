@@ -11,13 +11,14 @@ const glitchAnim = keyframes`
 `;
 
 // --- Styled Components ---
+// --- Styled Components ---
 const MainContainer = styled.div`
   background-color: #000;
   min-height: 100vh;
   color: #fff;
   font-family: 'Space Mono', monospace;
   position: relative;
-  overflow-x: hidden; /* Gorizontal scroll bo'lmasligi uchun */
+  overflow-x: hidden;
   display: flex;
   align-items: center;
   padding: 20px;
@@ -33,16 +34,17 @@ const ContentLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 60px; /* Navbar bo'lsa joy tashlash uchun */
+  margin-top: 40px; 
 
-  @media (max-width: 768px) {
-    align-items: center; /* Mobil versiyada markazga tekislash */
+  @media (max-width: 992px) {
+    align-items: center; 
     text-align: center;
+    margin-top: 20px;
   }
 `;
 
 const GlitchText = styled.h1`
-  font-size: clamp(2.5rem, 12vw, 7rem); /* Kichik ekranlarda kichrayadi */
+  font-size: clamp(2.8rem, 15vw, 7rem); /* Mobil uchun minimal o'lcham kattalashtirildi */
   font-weight: 900;
   letter-spacing: -2px;
   margin: 0;
@@ -68,11 +70,14 @@ const GlitchText = styled.h1`
 const DataGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
   margin-top: 20px;
 
-  @media (max-width: 768px) {
-    justify-content: center; /* Mobil versiyada kartalarni markazga surish */
+  @media (max-width: 992px) {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Mobil qurilmada 2 qator tartibli chiqishi uchun */
+    width: 100%;
   }
 `;
 
@@ -80,10 +85,13 @@ const DataFragment = styled(motion.div)`
   border-left: 2px solid #fff;
   padding-left: 15px;
   text-align: left;
-  min-width: 120px;
   
   .label { color: #444; font-size: 0.65rem; display: block; text-transform: uppercase; }
-  .value { font-size: 1rem; color: #fff; white-space: nowrap; }
+  .value { font-size: 0.9rem; color: #fff; white-space: nowrap; }
+
+  @media (max-width: 992px) {
+    border-left: 1px solid #333; /* Mobil versiyada nozikroq chiziq */
+  }
 `;
 
 const DownloadTrigger = styled(motion.button)`
@@ -99,21 +107,23 @@ const DownloadTrigger = styled(motion.button)`
   margin-top: 20px;
   cursor: pointer;
   font-family: inherit;
+  text-transform: uppercase;
 
   &:hover { background: #fff; color: #000; }
 
-  @media (max-width: 768px) {
-    width: 100%; /* Mobil versiyada to'liq kenglik */
+  @media (max-width: 992px) {
+    width: 100%; 
+    max-width: 300px;
     justify-content: center;
   }
 `;
 
 const AsciiWrapper = styled(motion.div)`
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow: hidden;
+  overflow: visible; /* ASCII kesilib qolmasligi uchun */
 
   @media (min-width: 992px) {
     margin-top: 0;
@@ -123,11 +133,19 @@ const AsciiWrapper = styled(motion.div)`
 
 const AsciiContainer = styled.pre`
   color: #fff;
-  font-size: clamp(4px, 1.5vw, 9px); /* Mobil ekranlarda rasm kichrayadi */
+  /* Mobil qurilmada ASCII san'atini sezilarli kattalashtirish */
+  font-size: clamp(9px, 3vw, 11px); 
   line-height: 1.1;
-  opacity: 0.6;
+  opacity: 0.8;
+  font-weight: bold;
   pointer-events: none;
   margin: 0;
+  text-align: left;
+  
+  @media (max-width: 992px) {
+    font-size: 10px; /* Mobil uchun optimal qat'iy o'lcham */
+    letter-spacing: -0.5px;
+  }
 `;
 
 // --- Komponent ---
@@ -239,17 +257,35 @@ function App() {
 
 `,    
     `
-      [==============================]
-      [  .-----------.  [01010101]  ]
-      [  |  SYSTEM   |  [11001100]  ]
-      [  |  STATUS:  |  [00011100]  ]
-      [  |  ACTIVE   |  [10101010]  ]
-      [  '-----------'  [01110101]  ]
-      [==============================]
-      [  | NODE_01 |   | NODE_02 |  ]
-      [  | ONLINE  |   | OFFLINE |  ]
-      [==============================]
-    `
+    ⠀⠀⠀⠀⢀⣶⣾⣲⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣯⣳⡄
+⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣟⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣽⣾⣿⣿⠇
+⠀⠀⠀⠀⠀⠀⠀⠀⢈⣟⡟⣳⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠴⡚⡋⡅⢸⠉⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣼⠁⣏⠃⡟⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡵⠞⣫⠍⠡⠛⡗⠦⣼⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢰⠇⠀⢩⣉⡈⠈⡻⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣀⠀⠀⣀⣤⡶⠋⠁⠋⡄⢩⡏⠃⠇⠁⠆⣿⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣟⠇⣽⠧⡲⠁⡁⢌⡎⢷⡄⠀⠀⠀⠀⠀⠀⠀⣠⠞⠡⡀⠉⠳⣞⠙⠀⠄⠲⠇⡀⡈⠐⢍⡚⠀⠀⠃⣿⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⡾⠁⠑⠟⡎⢁⡀⠆⠠⠁⠧⡙⢦⡀⠀⠀⠀⢀⡼⠃⠈⠢⣌⠲⡄⠈⢯⡪⣟⠂⠏⠇⠄⠂⠨⠈⠀⣁⠈⡏⠀⠀⠀
+⠀⠀⠀⠀⠀⣸⢋⠦⡄⠷⢶⠃⢋⠁⡉⢀⣀⣤⡭⠿⡶⠾⢶⡾⠡⡉⠢⢄⡀⠑⢌⠢⡊⣿⢍⠤⠀⠁⠂⠅⡁⠂⠐⠀⠄⡇⠀⠀⠀
+⠀⠀⠀⠀⢠⡏⠁⠌⡆⡺⠙⠠⣢⡵⠞⠫⠋⠀⢀⠈⠢⢅⡞⠡⣀⠈⠑⠢⢍⠒⣄⡳⡌⢸⣆⠑⠐⠠⠀⠀⠁⠂⠀⠃⠈⡇⠀⠀⠀
+⠀⠀⠀⠀⢾⠀⠊⡖⡂⣪⣴⠞⡛⡡⡄⠅⢀⠀⠄⠁⠁⣸⠀⠂⠤⣉⡒⠤⢄⣹⡟⠿⣾⠋⠉⠛⣶⠒⠛⠋⠉⠉⠙⠛⠲⠧⣤⡀⠀
+⠀⠀⠀⠀⠈⠳⣇⡃⣰⣿⠃⠀⣻⣥⠤⠶⠾⠤⣅⡐⠀⠸⠷⣤⣀⣀⠉⠁⠒⠢⠍⢰⡇⠀⠀⣠⣟⣀⡭⠭⠍⣁⡒⠒⠤⢄⣀⠀⠀
+⠀⠀⠀⠀⠄⠀⠈⣻⢿⡧⠇⡼⠏⠀⠀⠀⠀⠀⠀⠙⢦⠰⡀⠂⢉⠉⠙⠛⠛⠟⢻⠫⠛⣶⡶⠋⣐⠮⢟⡒⠤⣀⠈⠉⠒⠄⡾⠀⠀
+⠀⠀⠀⠀⠀⠀⣼⠃⢐⢅⣵⠃⢀⣤⡄⠀⠀⢠⣤⡀⠘⣇⠂⠅⠆⠄⠀⣢⠁⢉⠓⡀⠌⡔⢿⡜⠮⡓⢄⡈⠑⠠⣍⠒⠤⣼⠃⠀⠀
+⠀⣄⡀⠀⠀⢰⠏⡡⠁⠂⠙⣇⢸⣿⠇⠀⠀⠸⣿⡗⣸⠏⠀⠇⠀⠐⠵⠧⢃⠀⠈⠀⠄⡅⠈⠻⣄⠉⠢⣉⠢⢄⡀⠉⣾⠃⠀⠀⠀
+⠀⠈⠙⠀⠀⣾⠀⡈⢂⡴⠶⣿⣷⣦⠀⡄⢠⠀⣴⣾⡷⠖⠓⠶⢷⣀⠂⠁⠀⠪⡀⠀⠅⠐⠀⠀⠹⢷⣄⠈⠑⠦⢉⡾⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⡇⠀⣿⡋⠀⠀⠀⠙⠿⣟⣿⣿⡿⠟⠉⠀⠀⠀⠁⠀⠉⠛⢦⣧⡀⠀⠀⠀⠁⠄⢄⢀⠀⠊⠛⢶⠶⠋⢀⣀⡄⠀⠀⠀
+⠉⠉⠁⠀⠀⡇⣸⠃⣟⣦⣄⡀⠀⠀⠈⠙⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣦⠊⠠⠐⠊⡀⠂⠀⡐⠥⡾⠀⠀⠉⠉⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢿⡿⠀⢸⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣴⣶⠄⠀⠀⠈⢿⡆⠈⠃⠠⠀⠀⠐⣸⠃⠀⢀⣀⡀⠀⠀⠀⠀
+⠐⠚⠋⠀⠀⠘⣧⠀⠸⣿⣿⡿⠀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠋⠁⠀⠀⠁⠀⠀⠀⠀⠀⢿⡀⠄⠀⠂⢠⡾⠁⠀⠀⠀⠉⠙⠁⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠈⢷⡀⠈⠉⠀⠀⠀⠻⠿⠇⣠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠗⠀⣡⡼⠋⠀⠀⠀⢤⣀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠙⢳⡤⠤⣴⠲⡽⣖⣚⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣣⡴⠛⠁⠀⠀⠀⠀⠀⠀⠙⠃⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢰⠏⠀⠀⢨⣾⠁⣀⡉⠙⠓⢦⣀⣀⣀⣀⣀⣀⣤⣤⣴⣶⣿⣿⣿⣝⣷⠛⢳⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠙⣀⣀⣠⣾⣷⡿⣛⡻⣷⠄⣼⠭⡽⣿⣿⣅⡀⠀⣿⡟⠛⠻⣏⠉⠉⠙⠛⠋⠀⠀⣀⣴⣿⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣏⠁⡞⣿⣟⠴⢜⣿⠷⠳⢾⣅⠀⠉⠛⣿⡷⣿⠿⣄⠀⠙⢦⡀⠀⠀⠀⠀⠸⢿⣿⣿⣿⡆⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠳⢬⣟⣯⢿⡃⠀⠀⠀⢩⣠⡴⠞⠁⠀⠻⣤⡽⠀⠀⠀⠙⢦⡀⠀⠀⢀⣼⣿⡿⠙⠃⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⢧⣀⠀⣀⡼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣬⣷⣤⣴⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⢻⡉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⢿⠿⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    `,
   ]; 
 
   useEffect(() => {
