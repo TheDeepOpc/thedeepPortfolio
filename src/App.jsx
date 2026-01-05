@@ -314,7 +314,7 @@ const handleDownload = (e) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#ff0000', justifyContent: window.innerWidth < 768 ? 'center' : 'flex-start' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#00ff04ff', justifyContent: window.innerWidth < 768 ? 'center' : 'flex-start' }}>
                   <FaFingerprint size={14} />
                   <span style={{ fontSize: '0.6rem', letterSpacing: '3px' }}>IDENTITY_CONFIRMED</span>
                 </div>
