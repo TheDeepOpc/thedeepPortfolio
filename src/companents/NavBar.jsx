@@ -1,233 +1,197 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink as RRNavLink } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
+import { Hexagon, Menu, X } from "lucide-react";
 
-// Animations
-const fadeIn = keyframes`
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-`;
-
-const slideIn = keyframes`
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-`;
-
-const pulse = keyframes`
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-`;
-
-// Styled Components
-const StyledNavbar = styled.nav`
-  background: #000;
+// --- Styled Components ---
+const Nav = styled(motion.nav)`
+  background: ${props => props.scrolled ? "rgba(0, 0, 0, 0.95)" : "transparent"};
+  backdrop-filter: ${props => props.scrolled ? "blur(10px)" : "none"};
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2000;
-  box-shadow: 0 4px 50px rgba(48, 48, 48, 0.56);
-  padding: 1rem 2rem;
+  z-index: 5000;
+  padding: ${props => props.scrolled ? "0.8rem 2rem" : "1.2rem 2rem"};
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Logo chapda, Nav o'ngda */
   align-items: center;
+  border-bottom: 1px solid ${props => props.scrolled ? "rgba(255, 255, 255, 0.1)" : "transparent"};
   transition: all 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-  }
 `;
 
-const NavbarBrand = styled(RRNavLink)`
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #fff;
+const Logo = styled(RRNavLink)`
+  display: flex;
+  align-items: center;
+  gap: 12px;
   text-decoration: none;
-  letter-spacing: 1px;
-  transition: transform 0.3s ease, color 0.3s ease;
-
-  &:hover {
-    color: #e0e0e0;
-    transform: translateY(-2px);
-    animation: ${pulse} 0.5s ease;
-  }
-
-  span {
-    color: #b0b0b0;
-    font-weight: 400;
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  
+  .logo-text {
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    span { color: #555; }
   }
 `;
 
-const NavList = styled.ul`
+const DesktopNav = styled.ul`
   display: flex;
   list-style: none;
+  gap: 30px;
   margin: 0;
-  padding: 0;
 
-  @media (max-width: 768px) {
-    display: ${props => (props.isOpen ? "flex" : "none")};
-    flex-direction: column;
-    position: fixed;
-    top: 60px;
-    right: 0;
-    height: calc(100vh - 60px);
-    width: 280px;
-    background: #000;
-    padding: 2rem;
-    box-shadow: -5px 0 10px rgba(255, 255, 255, 0.05);
-    animation: ${slideIn} 0.4s ease-in-out;
-  }
-`;
-
-const NavItem = styled.li`
-  margin-left: 2rem;
-
-  @media (max-width: 768px) {
-    margin: 1.5rem 0;
+  @media (max-width: 992px) {
+    display: none;
   }
 `;
 
 const NavLink = styled(RRNavLink)`
-  color: #fff;
+  color: #777;
   text-decoration: none;
+  font-size: 0.85rem;
   font-weight: 500;
-  font-size: 1.1rem;
-  position: relative;
-  padding: 0.5rem 0;
-  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: 0.3s;
 
-  &.active {
-    color: #e0e0e0;
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(90deg, #fff, #b0b0b0);
-      animation: ${fadeIn} 0.3s ease;
-    }
-  }
-
-  &:hover {
-    color: #e0e0e0;
-    transform: translateY(-2px);
-    animation: ${pulse} 0.5s ease;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.3rem;
-    padding: 0.8rem 0;
+  &.active, &:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   }
 `;
 
-const Hamburger = styled.div`
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  width: 30px;
-  height: 20px;
-  justify-content: space-between;
-
-  span {
-    width: 100%;
-    height: 3px;
-    background: #fff;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-
-  @media (max-width: 768px) {
-    display: flex;
-  }
-
-  ${props =>
-    props.isOpen &&
-    `
-    span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 6px);
-      background: #e0e0e0;
-    }
-    span:nth-child(2) {
-      opacity: 0;
-    }
-    span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-      background: #e0e0e0;
-    }
-  `}
-`;
-
-const MusicControls = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  @media (max-width: 768px) {
-    display: ${props => (props.isOpen ? "flex" : "none")};
-    flex-direction: column;
-    position: absolute;
-    top: 350px;
-    right: 2rem;
-    animation: ${fadeIn} 0.4s ease-in-out;
-  }
-`;
-
-const MusicButton = styled.button`
+const MobileToggle = styled.button`
   background: none;
   border: none;
   color: #fff;
-  font-size: 1.2rem;
+  display: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  @media (max-width: 992px) { display: block; }
+`;
 
-  &:hover {
-    color: #e0e0e0;
-    transform: scale(1.1);
+// MOBIL MENYU: Eniga yarim (50%), Bo'yiga to'liq (100vh)
+const SideDrawer = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%; /* Horizontal yarim */
+  height: 100vh; /* Vertical to'liq */
+  background: #050505;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 6000;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.9);
+
+  @media (max-width: 576px) {
+    width: 70%; /* Juda kichik ekranlarda biroz kengroq */
   }
 `;
 
+const Overlay = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 5500;
+`;
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-
-
-
-  const toggle = () => setIsOpen(!isOpen);
+  const links = [
+    { n: "Home", p: "/" },
+    { n: "About", p: "/about" },
+    { n: "Skills", p: "/skills" },
+    { n: "Certificates", p: "/certificates" },
+    { n: "Contact", p: "/contact" }
+  ];
 
   return (
-    <StyledNavbar>
-      <NavbarBrand data-aos="fade-right" data-aos-duration="1500" data-aos-delay="300" to="/">
-        <h2 style={{ color: "#fff", fontFamily: "sans-serif" }}>The Deep</h2>
-      </NavbarBrand>
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-     
-        <Hamburger isOpen={isOpen} onClick={toggle}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </Hamburger>
-      </div>
-      <NavList isOpen={isOpen}>
-        {["Home", "About", "Skills", "Certificates", "Contact"].map(item => (
-          <NavItem data-aos="fade-left" data-aos-duration="1500" data-aos-delay="300" key={item}>
-            <NavLink
-              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-              onClick={() => setIsOpen(false)}
-            >
-              {item}
-            </NavLink>
+    <>
+      <Nav scrolled={scrolled}>
+        {/* CHAPDA LOGO */}
+        <Logo to="/">
+          <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }}>
+            <Hexagon size={22} color="#fff" />
+          </motion.div>
+          <div className="logo-text">The<span>DEEP</span>_</div>
+        </Logo>
+
+        {/* O'NGDA NAVBAR */}
+        <DesktopNav>
+          {links.map((link) => (
+            <li key={link.n}>
+              <NavLink to={link.p}>{link.n}</NavLink>
+            </li>
+          ))}
+        </DesktopNav>
+
+        <MobileToggle onClick={() => setIsOpen(true)}>
+          <Menu size={24} />
+        </MobileToggle>
+      </Nav>
+
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <Overlay 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }} 
+              onClick={() => setIsOpen(false)} 
+            />
             
-          </NavItem>
-        
-        ))}
+            <SideDrawer
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
+                <X size={28} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer', color: '#fff' }} />
+              </div>
 
-      </NavList>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', marginTop: '40px' }}>
+                {links.map((link, i) => (
+                  <motion.div
+                    key={link.n}
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <NavLink 
+                      to={link.p} 
+                      onClick={() => setIsOpen(false)}
+                      style={{ fontSize: '1.2rem', display: 'block' }}
+                    >
+                      {link.n}
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </div>
 
-    </StyledNavbar>
+              <div style={{ marginTop: 'auto', borderTop: '1px solid #111', paddingTop: '20px' }}>
+                <span style={{ fontSize: '0.6rem', color: '#444', letterSpacing: '2px' }}>
+                  OPERATOR: S.SHOAKBAROV
+                </span>
+              </div>
+            </SideDrawer>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

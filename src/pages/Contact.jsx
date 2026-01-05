@@ -1,177 +1,261 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { Github, Linkedin, Send, Mail, ShieldCheck, Terminal, Clock, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Send, Mail, ShieldCheck, Terminal, Clock, MapPin, ChevronRight } from "lucide-react";
 
-// === Animatsiya ===
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-// === Styled Components ===
-const PageWrapper = styled.div`
-  padding: 100px 0;
+// === Dizayn Elementlari ===
+const Section = styled.section`
+  background: #000;
   color: #fff;
-  margin-top: 50px;
+  padding: 10rem 2rem;
   font-family: 'Inter', sans-serif;
+  overflow: hidden;
 `;
 
-const TextBlock = styled.div`
-  animation: ${fadeIn} 1s ease-out;
-  @media (max-width: 992px) { text-align: center; margin-bottom: 4rem; }
+const Container = styled.div`
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const Title = styled.h1`
-  font-size: 3.5rem;
-  font-weight: 800;
-  background: linear-gradient(to right, #fff, #666);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
+const SideInfo = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-const ProtocolSection = styled.div`
-  margin-top: 2.5rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-left: 3px solid #fff;
-  border-radius: 0 10px 10px 0;
+const GlitchTitle = styled.h2`
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  margin-bottom: 2rem;
+  
+  span {
+    display: block;
+    -webkit-text-stroke: 1px #fff;
+    -webkit-text-fill-color: transparent;
+  }
 `;
 
-const SocialGrid = styled.div`
+const ProtocolBox = styled(motion.div)`
+  background: #050505;
+  border: 1px solid #111;
+  border-left: 4px solid #fff;
+  padding: 2.5rem;
+  position: relative;
+  
+  &::before {
+    content: "SECURITY_PROTOCOL_V2";
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: #000;
+    padding: 0 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: #444;
+  }
+`;
+
+const SocialGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  @media (max-width: 576px) { grid-template-columns: 1fr; }
-`;
-
-const SocialCard = styled.a`
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.5rem;
-  border-radius: 16px;
-  text-decoration: none !important;
-  transition: all 0.4s ease;
   
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const SocialCard = styled(motion.a)`
+  background: #050505;
+  border: 1px solid #111;
+  padding: 2.5rem;
+  text-decoration: none !important;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+  svg { color: #444; transition: 0.4s; }
+  h3 { color: #fff; font-size: 1.3rem; font-weight: 800; margin: 0; text-transform: uppercase; }
+  p { color: #666; font-size: 0.8rem; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+
   &:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  }
+    background: #fff;
+    border-color: #fff;
+    transform: translateY(-10px);
 
-  h3 { color: #fff; font-size: 1.2rem; margin: 10px 0 5px; }
-  p { color: #666; font-size: 0.85rem; margin: 0; }
-  svg { color: #fff; opacity: 0.8; }
+    svg { color: #000; transform: scale(1.2); }
+    h3 { color: #000; }
+    p { color: #333; }
+  }
 `;
 
-const InfoBar = styled.div`
+const SystemStatus = styled(motion.div)`
   margin-top: 3rem;
+  border-top: 1px solid #111;
+  padding-top: 3rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.01);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+`;
 
-  .info-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    h5 { font-size: 0.9rem; color: #fff; margin-bottom: 4px; text-transform: uppercase; }
-    p { font-size: 0.85rem; color: #777; margin: 0; line-height: 1.5; }
-    svg { color: #888; margin-top: 3px; }
+const StatusItem = styled.div`
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  
+  .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  
+  .value {
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: 600;
   }
 `;
+
+// === Animatsiya Variantlari ===
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
 
 export default function Contact() {
   return (
-    <PageWrapper>
-      <div className="container mt-5">
-        <div className="row align-items-center mt-5">
+    <Section id="contact">
+      <Container>
+        {/* Chap tomon: Strategik Ma'lumotlar */}
+        <SideInfo
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <div>
+            <GlitchTitle>
+              Establish<span>Uplink_</span>
+            </GlitchTitle>
+            <p style={{ color: '#666', fontSize: '1.1rem', maxWidth: '450px', marginBottom: '3rem' }}>
+I accept professional inquiries regarding security consulting or Red Team operations.
+            </p>
+
+            <ProtocolBox
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem' }}>
+                <ShieldCheck size={20} color="#fff" />
+                <span style={{ fontSize: '0.9rem', fontWeight: 'bold', textTransform: 'uppercase' }}>Comm_Protocol</span>
+              </div>
+              <ul style={{ color: '#888', fontSize: '0.85rem', paddingLeft: '1.2rem', margin: 0, listStyleType: 'square' }}>
+                <li style={{ marginBottom: '8px' }}>Initial discovery call for new projects.</li>
+                <li style={{ marginBottom: '8px' }}>NDAs required for all technical audits.</li>
+                <li>Secure hand-off for all sensitive data.</li>
+              </ul>
+            </ProtocolBox>
+          </div>
+
+          <SystemStatus>
+            <StatusItem>
+              <Clock size={20} color="#444" />
+              <div>
+                <div className="label">Availability</div>
+                <div className="value">MON-FRI / 09:00-00:00</div>
+              </div>
+            </StatusItem>
+            <StatusItem>
+              <MapPin size={20} color="#444" />
+              <div>
+                <div className="label">Location</div>
+                <div className="value">TASHKENT / REMOTE</div>
+              </div>
+            </StatusItem>
+          </SystemStatus>
+        </SideInfo>
+
+        {/* O'ng tomon: Social Grid */}
+        <SocialGrid
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <SocialCard 
+            href="https://linkedin.com/in/callmethedeep" 
+            target="_blank"
+            variants={itemVariants}
+          >
+            <Linkedin size={28} />
+            <h3>LinkedIn</h3>
+            <p>Corporate_Network</p>
+          </SocialCard>
+
+          <SocialCard 
+            href="https://github.com/TheDeepOpc" 
+            target="_blank"
+            variants={itemVariants}
+          >
+            <Github size={28} />
+            <h3>GitHub</h3>
+            <p>Security_Research</p>
+          </SocialCard>
+
+          <SocialCard 
+            href="https://t.me/callmethedeep" 
+            target="_blank"
+            variants={itemVariants}
+          >
+            <Send size={28} />
+            <h3>Telegram</h3>
+            <p>Encrypted_Chat</p>
+          </SocialCard>
+
+          <SocialCard 
+            href="mailto:sardordev02@gmail.com"
+            variants={itemVariants}
+          >
+            <Mail size={28} />
+            <h3>Email</h3>
+            <p>Direct_Inquiry</p>
+          </SocialCard>
           
-          {/* Chap tomon: Strategik ma'lumotlar */}
-          <div className="col-lg-5">
-            <TextBlock>
-              <Title>Contact_</Title>
-              <p style={{ color: '#aaa', fontSize: '1.1rem', lineHeight: '1.7' }}>
-                Xavfsizlik bo'yicha konsultatsiya, hamkorlik yoki Red Team operatsiyalari bo'yicha professional so'rovlarni qabul qilaman.
-              </p>
-
-              <ProtocolSection>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                  <ShieldCheck size={18} color="#fff" />
-                  <span style={{ fontSize: '0.9rem', fontWeight: 'bold', textTransform: 'uppercase' }}>Communication Protocol</span>
-                </div>
-                <ul style={{ color: '#888', fontSize: '0.85rem', paddingLeft: '18px', margin: 0 }}>
-                  <li>Initial discovery call for new projects.</li>
-                  <li>NDAs required for all technical audits.</li>
-                  <li>Secure hand-off for all sensitive data.</li>
-                </ul>
-              </ProtocolSection>
-
-              <div style={{ marginTop: '2.5rem' }}>
-                
-  
-              </div>
-            </TextBlock>
+          <div style={{ gridColumn: 'span 2', textAlign: 'right', marginTop: '2rem' }}>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 0.3 }}
+              style={{ fontSize: '0.7rem', letterSpacing: '4px', fontFamily: 'Space Mono' }}
+            >
+              [ TRANSMISSION_END // 2026 ]
+            </motion.p>
           </div>
-
-          {/* O'ng tomon: Social Grid va Stats */}
-          <div className="col-lg-7">
-            <SocialGrid>
-              <SocialCard href="https://linkedin.com/in/callmethedeep" target="_blank">
-                <Linkedin size={24} />
-                <h3>LinkedIn</h3>
-                <p>Corporate network & official CV</p>
-              </SocialCard>
-
-              <SocialCard href="https://github.com/TheDeepOpc" target="_blank">
-                <Github size={24} />
-                <h3>GitHub</h3>
-                <p>Security tools & open research</p>
-              </SocialCard>
-
-              <SocialCard href="https://t.me/callmethedeep" target="_blank">
-                <Send size={24} />
-                <h3>Telegram</h3>
-                <p>End-to-end encrypted chat</p>
-              </SocialCard>
-
-              <SocialCard href="mailto:sardordev02@gmail.com">
-                <Mail size={24} />
-                <h3>Email</h3>
-                <p>Direct professional inquiries</p>
-              </SocialCard>
-            </SocialGrid>
-
-            <InfoBar>
-              <div className="info-item">
-                <Clock size={20} />
-                <div>
-                  <h5>Availability</h5>
-                  <p>Mon — Fri, 09:00 - 00:00<br />(GMT +5)</p>
-                </div>
-              </div>
-              <div className="info-item">
-                <MapPin size={20} />
-                <div>
-                  <h5>Location</h5>
-                  <p>Remote / Global Operations<br />Based in Tashkent, UZ</p>
-                </div>
-              </div>
-            </InfoBar>
-
-            <div style={{ marginTop: '2.5rem', textAlign: 'right', opacity: 0.4 }}>
-              <p style={{ fontSize: '0.75rem', letterSpacing: '2px' }}>
-                TheDEEP // 2024
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </PageWrapper>
+        </SocialGrid>
+      </Container>
+    </Section>
   );
 }

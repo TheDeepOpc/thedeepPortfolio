@@ -1,218 +1,207 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { Shield, Code2, Cpu, Network, Database, Lock, Target, Zap, Eye, AlertTriangle, Search, Bug } from "lucide-react";
-import '../App.css';
+import { 
+  Shield, Target, Eye, AlertTriangle, Search, Bug, 
+  Terminal, Activity, Hexagon
+} from "lucide-react";
+import { motion } from "framer-motion";
 import Photo from '../assets/photo.png';
-// === Animations ===
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+
+// === CSS Animatsiyalar ===
+const scanline = keyframes`
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(400%); }
 `;
 
-
-const TextBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  animation: ${fadeIn} 1.3s ease-out;
-  @media (max-width: 768px) {
-    align-items: center;
-    text-align: center;
-  }
+const framePulse = keyframes`
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 `;
 
-const Title = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 700;
+// === Styled Components ===
+const Section = styled.section`
+  padding: 120px 0;
+  background-color: #000;
   color: #fff;
-  margin-bottom: 0.8rem;
-  position: relative;
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 50px;
-    height: 2px;
-    background: #e0e0e0;
-    @media (max-width: 768px) {
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  font-family: 'Space Mono', monospace;
+  overflow: hidden;
+`;
+
+const TitleWrapper = styled(motion.div)`
+  border-left: 4px solid #fff;
+  padding-left: 25px;
+  margin-bottom: 50px;
+  
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+    span { color: #444; }
   }
-`;
-
-const Subtitle = styled.h2`
-  font-size: 1.1rem;
-  color: #b0b0b0;
-  margin-bottom: 1.5rem;
-  font-weight: 400;
-`;
-
-const Paragraph = styled.p`
-  color: #d0d0d0;
-  line-height: 1.7;
-  font-size: 16px;
-  max-width: 600px;
-  margin-bottom: 2rem;
 `;
 
 const InfoGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  max-width: 700px;
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
 `;
 
-const InfoCard = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  &:hover {
-    transform: translateY(-5px);
-  }
-  svg {
-    color: #e0e0e0;
-    width: 32px;
-    height: 32px;
-    margin-bottom: 0.8rem;
-  }
+const Card = styled(motion.div)`
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  position: relative;
+  overflow: hidden;
+
   h3 {
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-  p {
     font-size: 0.9rem;
-    color: #b0b0b0;
+    color: #fff;
+    margin: 15px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
-`;
 
-const Quote = styled.div`
-  margin-top: 2rem;
-  max-width: 600px;
-  padding: 1rem;
-  border-left: 2px solid #e0e0e0;
-  @media (max-width: 768px) {
-    border-left: none;
-    border-top: 2px solid #e0e0e0;
-  }
   p {
-    font-style: italic;
-    color: #b0b0b0;
-    font-size: 1rem;
+    font-size: 0.8rem;
+    color: #666;
     line-height: 1.6;
+    margin: 0;
   }
-`;
 
-const CTAButton = styled.button`
-  margin-top: 2rem;
-  padding: 0.8rem 2rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #fff;
-  background: transparent;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  .icon { color: #444; transition: 0.3s; }
+
   &:hover {
-    background: #e0e0e0;
-    color: #0a0a0a;
+    border-color: #fff;
+    .icon { color: #fff; transform: scale(1.1); }
   }
 `;
 
-const HighlightSection = styled.div`
-  margin-top: 2rem;
-  max-width: 600px;
-  h3 {
-    font-size: 1.2rem;
-    color: #fff;
-    margin-bottom: 1rem;
+const PhotoContainer = styled(motion.div)`
+  position: relative;
+  z-index: 1;
+
+  .main-img {
+    width: 100%;
+    filter: grayscale(1) contrast(1.1);
+    border: 1px solid #222;
+    position: relative;
+    z-index: 2;
   }
-  p {
-    font-size: 0.9rem;
-    color: #b0b0b0;
-    line-height: 1.6;
+
+  /* Kiber ramka elementlari */
+  &::before {
+    content: "";
+    position: absolute;
+    top: -15px; right: -15px;
+    width: 100px; height: 100px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    z-index: 3;
+    animation: ${framePulse} 2s infinite;
   }
+
+  .scan-effect {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: #fff;
+    box-shadow: 0 0 15px #fff;
+    z-index: 4;
+    animation: ${scanline} 3s linear infinite;
+    opacity: 0.5;
+  }
+`;
+
+const DataOverlay = styled.div`
+  position: absolute;
+  top: 10px;
+  left: -40px;
+  transform: rotate(-90deg);
+  font-size: 0.6rem;
+  color: #333;
+  letter-spacing: 5px;
 `;
 
 export default function About() {
+  const services = [
+    { icon: <Target />, title: "Penetration Testing", desc: "Network, web, and app assessment via industry-standard methodologies." },
+    { icon: <Search />, title: "Vulnerability Assessment", desc: "Automated/manual scanning, risk prioritization, and remediation." },
+    { icon: <Shield />, title: "Red Team Operations", desc: "Advanced persistent threat simulation and attack chain execution." },
+    { icon: <Bug />, title: "Exploit Development", desc: "Custom PoC development and deep vulnerability research." },
+    { icon: <Eye />, title: "Security Auditing", desc: "Code review, configuration auditing, and compliance assessment." },
+    { icon: <AlertTriangle />, title: "Incident Response", desc: "Digital forensics, malware analysis, and breach investigation." }
+  ];
+
   return (
-    <>
-      <br /><br />
-      <div  className="Page">
-        <div className="container">
-          <div className="row d-flex ">
-            <div className="col-lg-6  mt-5">
-              <TextBlock data-aos="fade" data-aos-duration="1500" data-aos-delay="300">
-                <Title>Sardor Shoakbarov</Title>
-                <Subtitle>Offensive Security Specialist | Red Team Analyst</Subtitle>
-                <Paragraph>
-A dedicated penetration tester with deep expertise in offensive security methodologies, exploit development, and vulnerability research. He excels in network reconnaissance, web application testing, binary exploitation, and post-exploitation techniques using industry-standard tools. His practical approach focuses on identifying real-world attack vectors, developing custom exploits, and providing actionable remediation strategies to strengthen defensive postures against sophisticated threats.                </Paragraph>
-                <InfoGrid>
-                  <InfoCard>
-                    <Target />
-                    <h3>Penetration Testing</h3>
-                    <p>Comprehensive network, web, and application penetration testing using industry-standard methodologies.</p>
-                  </InfoCard>
-                  <InfoCard>
-                    <Search />
-                    <h3>Vulnerability Assessment</h3>
-                    <p>Automated and manual vulnerability scanning, risk prioritization, and remediation guidance.</p>
-                  </InfoCard>
-                  <InfoCard>
-                    <Shield />
-                    <h3>Red Team Operations</h3>
-                    <p>Advanced persistent threat simulation and adversarial attack chain execution.</p>
-                  </InfoCard>
-                  <InfoCard>
-                    <Bug />
-                    <h3>Exploit Development</h3>
-                    <p>Custom exploit creation, proof-of-concept development, and vulnerability research.</p>
-                  </InfoCard>
-                  <InfoCard>
-                    <Eye />
-                    <h3>Security Auditing</h3>
-                    <p>Code review, configuration auditing, and compliance assessment against security standards.</p>
-                  </InfoCard>
-                  <InfoCard>
-                    <AlertTriangle />
-                    <h3>Incident Response</h3>
-                    <p>Digital forensics, malware analysis, and breach investigation services.</p>
-                  </InfoCard>
-                </InfoGrid>
-               
-              </TextBlock>
+    <Section>
+      <div className="container">
+        <div className="row g-5 align-items-center">
           
-                 </div>
-              <div className="col-lg-6">
-                <div className="photoabout mt-5" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="300" >
+          {/* CHAP TARAF: MA'LUMOTLAR */}
+          <div className="col-lg-7 order-2 order-lg-1">
+            <TitleWrapper
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <motion.span 
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }} 
+                style={{ fontSize: '0.7rem', color: '#555', letterSpacing: '4px' }}
+              >
+                [ OPERATOR_PROFILE_DECRYPTED ]
+              </motion.span>
+              <h1>SARDOR <br /> <span>SHOAKBAROV</span></h1>
+              <p style={{ marginTop: '20px', color: '#888', maxWidth: '600px', lineHeight: '1.7' }}>
+                A dedicated penetration tester with deep expertise in offensive security methodologies, 
+                exploit development, and vulnerability research. Focusing on identifying real-world attack vectors.
+              </p>
+            </TitleWrapper>
 
+            <InfoGrid>
+              {services.map((s, i) => (
+                <Card
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="icon">{React.cloneElement(s.icon, { size: 20 })}</div>
+                  <h3>{s.title}</h3>
+                  <p>{s.desc}</p>
+                </Card>
+              ))}
+            </InfoGrid>
+          </div>
 
-<img src={Photo} alt="" />
-
-                </div>
-
+          {/* O'NG TARAF: RASM */}
+          <div className="col-lg-5 order-1 order-lg-2">
+            <PhotoContainer
+              initial={{ opacity: 0, scale: 0.9, x: 50 }}
+              whileInView={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
+              <DataOverlay>RE_TEAM_OPERATOR_v8</DataOverlay>
+              <div className="scan-effect" />
+              <img src={Photo} alt="Sardor S." className="main-img" />
+              
+              <div style={{ 
+                marginTop: '20px', 
+                borderLeft: '1px solid #222', 
+                paddingLeft: '15px' 
+              }}>
+               
               </div>
-         
+            </PhotoContainer>
           </div>
 
         </div>
-      </div><br /><br /><br />
-    </>
+      </div>
+    </Section>
   );
 }
