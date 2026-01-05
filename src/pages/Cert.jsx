@@ -152,12 +152,12 @@ const ViewButton = styled.a`
 
 export default function Certificates() {
   const certs = [
-    { title: "Cisco Ethical Hacker", org: "Cisco Systems", year: "2025", link: "#" },
-    { title: "Cisco Linux Essentials", org: "Cisco LPI", year: "2025", link: "#" },
-    { title: "Cybersecurity Practitioner", org: "Palo Alto Networks", year: "2025", link: "#" },
-    { title: "Introduction to Cybersecurity", org: "Cisco", year: "2025", link: "#" },
-    { title: "Network Security Fundamentals", org: "Palo Alto Networks", year: "2025", link: "#" },
-    { title: "Endpoint Security", org: "Palo Alto Networks", year: "2025", link: "#" },
+    { title: "Cisco Ethical Hacker", org: "Cisco", year: "2025", link: "https://www.credly.com/badges/777ae72b-49df-4a0d-9a05-c3fd02644734/public_url" },
+    { title: "Certified Red Team Analyst", org: "CyberWarfare Labs", year: "2025", link: "#" },
+    { title: "Cisco Linux Essentials", org: "Cisco", year: "2025", link: "https://www.credly.com/badges/65024c1a-4c2d-4ea9-9d21-478db8994a76/public_url" },
+    { title: "Certified Red Team Infra Dev", org: "CyberWarfare Labs", year: "2025", link: "https://labs.cyberwarfare.live/credential/achievement/690664425e19303aec1fef99" },
+    { title: "Introduction to Cybersecurity", org: "Cisco", year: "2025", link: "https://www.credly.com/badges/89c6646e-df75-4266-9da8-818d1b796226/public_url" },
+
   ];
 
   // Animatsiya variantlari
