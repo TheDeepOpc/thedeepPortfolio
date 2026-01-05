@@ -7,29 +7,30 @@ import { Github, FileText, ExternalLink, ShieldAlert, Code, Lock } from "lucide-
 const Section = styled.section`
   background: #000;
   color: #fff;
-  padding: 8rem 2rem;
+  padding: clamp(4rem, 10vh, 8rem) 1.5rem; /* Padding mobil uchun kichrayadi */
   min-height: 100vh;
   font-family: 'Space Mono', monospace;
+  overflow-x: hidden;
 `;
 
 const Header = styled.div`
   max-width: 1200px;
-  margin: 0 auto 5rem;
+  margin: 0 auto clamp(3rem, 8vh, 5rem);
   border-bottom: 1px solid #111;
   padding-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  gap: 20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
   }
 `;
 
 const Title = styled.h2`
-  font-size: 3.5rem;
+  font-size: clamp(2.2rem, 7vw, 3.5rem); /* Dinamik shrift */
   font-weight: 900;
   margin: 0;
   text-transform: uppercase;
@@ -39,18 +40,20 @@ const Title = styled.h2`
 
 const FilterTabs = styled.div`
   display: flex;
-  gap: 20px;
+  gap: clamp(10px, 2vw, 20px);
+  flex-wrap: wrap; /* Mobil uchun tugmalarni pastga tushiradi */
 `;
 
 const TabButton = styled.button`
   background: none;
   border: 1px solid ${props => props.active ? "#fff" : "#111"};
   color: ${props => props.active ? "#fff" : "#444"};
-  padding: 8px 20px;
+  padding: 8px 16px;
   font-size: 0.7rem;
   text-transform: uppercase;
   cursor: pointer;
   transition: 0.3s;
+  white-space: nowrap;
   &:hover { border-color: #555; }
 `;
 
@@ -58,19 +61,21 @@ const ProjectGrid = styled(motion.div)`
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  /* Mobil qurilmada 1 ta, planshetda 2 ta va desktopda 3 ta ustun */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
   gap: 2rem;
 `;
 
 const ProjectCard = styled(motion.div)`
   background: #050505;
   border: 1px solid #111;
-  padding: 2rem;
+  padding: clamp(1.5rem, 4vw, 2rem);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 320px;
+  min-height: 350px;
+  height: 100%;
   overflow: hidden;
 
   &::before {
@@ -92,9 +97,10 @@ const ProjectCard = styled(motion.div)`
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     margin-bottom: 1rem;
     color: #eee;
+    line-height: 1.2;
   }
 
   p {
@@ -107,13 +113,14 @@ const ProjectCard = styled(motion.div)`
   .tech-stack {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 2rem;
     span {
       font-size: 0.6rem;
       background: #111;
       padding: 4px 10px;
       color: #888;
+      border: 1px solid #1a1a1a;
     }
   }
 
@@ -121,6 +128,8 @@ const ProjectCard = styled(motion.div)`
     display: flex;
     gap: 20px;
     margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #111;
     a { color: #fff; transition: 0.3s; &:hover { color: #888; } }
   }
 
@@ -130,7 +139,7 @@ const ProjectCard = styled(motion.div)`
   }
 `;
 
-// === Ma'lumotlar ===
+// === Ma'lumotlar (O'zgartirilmadi) ===
 const projects = [
   {
     id: 1,
@@ -219,7 +228,7 @@ export default function Portfolio() {
                     <Github size={18} />
                   </a>
                 )}
-                <a href={item.link}>
+                <a href={item.link} target="_blank" rel="noreferrer">
                   {item.category === 'reports' ? <FileText size={18} /> : <ExternalLink size={18} />}
                 </a>
                 <div style={{ marginLeft: 'auto' }}>
@@ -234,7 +243,7 @@ export default function Portfolio() {
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        style={{ textAlign: 'center', marginTop: '5rem', color: '#222', fontSize: '0.7rem' }}
+        style={{ textAlign: 'center', marginTop: '5rem', color: '#222', fontSize: '0.65rem', letterSpacing: '2px' }}
       >
         ACCESS_LEVEL: RESTRICTED // 0xCC001
       </motion.div>
