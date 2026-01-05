@@ -151,7 +151,18 @@ const AsciiContainer = styled.pre`
 // --- Komponent ---
 function App() {
   const [randomArt, setRandomArt] = useState("");
-
+const handleDownload = (e) => {
+    e.preventDefault();
+    // Faylga boradigan yo'lni tekshirish
+    const fileUrl = "/files/Resume_sardor.pdf";
+    
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.setAttribute("download", "Resume_Sardor.pdf"); // Fayl yuklangandagi nomi
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   const cyberArts = [
     `
     ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -328,12 +339,14 @@ function App() {
                 ))}
               </DataGrid>
 
-              <DownloadTrigger
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                DOWNLOAD_CV <FaDownload size={14} style={{ marginLeft: '10px' }} />
-              </DownloadTrigger>
+          <DownloadTrigger
+      href="#" // Funksiya orqali boshqaramiz
+      onClick={handleDownload}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      DOWNLOAD_CV <FaDownload size={14} style={{ marginLeft: '10px' }} />
+    </DownloadTrigger>
             </ContentLayout>
           </div>
 
