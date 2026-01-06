@@ -309,8 +309,8 @@ function App() {
   }, []);
 
   return (
-    <MainContainer>
-      <div className="container">
+    <MainContainer className=''>
+      <div className="container mt-5">
         <div className="row align-items-center">
           <div className="col-lg-7 order-2 order-lg-1">
             <ContentLayout>
