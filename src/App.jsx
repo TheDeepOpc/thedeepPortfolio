@@ -362,19 +362,19 @@ function App() {
                 transition={{ delay: 0.8 }}
               >
                 <SocialLink href="https://github.com/TheDeepOpc" target="_blank">
-                  <FaGithub /> <span>GITHUB_SRC</span>
+                  <FaGithub /> <span>Github</span>
                 </SocialLink>
                 
                 <SocialLink href="https://linkedin.com/in/callmethedeep" target="_blank">
-                  <FaLinkedin /> <span>LINKEDIN_ID</span>
+                  <FaLinkedin /> <span>LINKEDIN</span>
                 </SocialLink>
                 
                 <SocialLink href="https://instagram.com/thedeep" target="_blank">
-                  <FaInstagram /> <span>VISUAL_LOGS</span>
+                  <FaInstagram /> <span>Instagram</span>
                 </SocialLink>
 
                 <SocialLink href="https://t.me/callmethedeep" target="_blank">
-                   <FaTerminal /> <span>TERMINAL_COMM</span>
+                   <FaTerminal /> <span>Telegram</span>
                 </SocialLink>
               </SocialUplink>
 
