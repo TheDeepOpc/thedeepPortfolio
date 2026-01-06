@@ -113,11 +113,10 @@ const NavBar = () => {
   const links = [
     { n: "Home", p: "/" },
     { n: "About", p: "/about" },
+                { n: "News", p: "/news" },
         { n: "Portfolio", p: "/portfolio" },
-
     { n: "Skills", p: "/skills" },
     { n: "Certificates", p: "/certificates" },
-    
     { n: "Contact", p: "/contact" }
   ];
 
