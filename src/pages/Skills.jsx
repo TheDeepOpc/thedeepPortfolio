@@ -233,7 +233,7 @@ export default function Skills() {
     {
       title: 'Web Application Security',
       icon: <Globe size={42} strokeWidth={1.5} />,
-      subs: ['OWASP Top 10 Standards', 'Authentication & Auth Testing', 'Security Misconfigurations', 'API Security Analysis']
+      subs: ['OWASP Top 10 Standards', 'Authentication & Auth Testing', 'Security Misconfigurations']
     },
     {
       title: 'Offensive Operations',
@@ -248,12 +248,12 @@ export default function Skills() {
     {
       title: 'Scripting & Automation',
       icon: <Code size={42} strokeWidth={1.5} />,
-      subs: ['Python for Security Tools', 'Bash & PowerShell Scripting', 'Exploit Development', 'Malware Analysis']
+      subs: ['Python for Security Tools', 'Bash & PowerShell Scripting', 'Malware Analysis']
     },
     {
       title: 'OS & Technical Reporting',
       icon: <PenTool size={42} strokeWidth={1.5} />,
-      subs: ['Kali Linux / Parrot OS Expert', 'Technical Pentest Reporting', 'Proof-of-Concept (PoC)', 'Incident Documentation']
+      subs: ['Kali Linux / Windows OS Expert', 'Technical Pentest Reporting', 'Proof-of-Concept (PoC)', 'Incident Documentation']
     }
   ];
 
@@ -281,7 +281,7 @@ export default function Skills() {
         <MarqueeTrack>
           {[...Array(8)].map((_, i) => (
             <MarqueeItem key={i}>
-              • RED TEAMING • PENETRATION TESTING • CYBER SECURITY • EXPLOIT DEVELOPMENT • THREAT HUNTING
+              • PENETRATION TESTING • CYBER SECURITY • VULNERABILITY ASSESSMENT • SOFTWARE ENGEENER • OFFENSIVE SECURITY •
             </MarqueeItem>
           ))}
         </MarqueeTrack>
