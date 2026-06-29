@@ -161,16 +161,16 @@ const projects = [
     github: "https://github.com/TheDeepOpc/DeepSec",
     link: "https://github.com/TheDeepOpc/DeepSec"
   },
-  {
-    id: 3,
+ {
+    id: 2,
     category: "projects",
-    type: "Environment Simulation & Sandbox",
-    title: "Linux Basics for Beginners // Virtual Terminal Simulator",
-    desc: "A Python-based Linux environment simulator designed to provide a virtualized terminal experience without OS installation. This tool replicates the Linux filesystem hierarchy and command execution logic, offering a secure sandbox for users to learn system administration and shell interactions.",
-    tech: ["Python"],
-    github: "https://github.com/TheDeepOpc/LinuxBasics",
-    link: "https://github.com/TheDeepOpc/LinuxBasics"
-  }
+    type: "Bulk Vulnerability Scanning & Exploitation",
+    title: "NullSight // Authorized Penetration Testing Scanner",
+    desc: "A multi-vector security scanner built for authorized penetration testers and researchers. NullSight combines 40+ CVE-specific payloads, framework misconfiguration detection, SSRF cloud-metadata probes, GraphQL/JWT API security checks, unauthenticated database probes, and LFI chaining into a single multi-threaded tool, with entropy-based false-positive filtering and JSON/CSV/Markdown/terminal reporting.",
+    tech: ["Python", "Multi-threading", "Vulnerability Scanning"],
+    github: "https://github.com/TheDeepOpc/nullsight",
+    link: "https://github.com/TheDeepOpc/nullsight"
+}
 ];
 
 export default function Portfolio() {

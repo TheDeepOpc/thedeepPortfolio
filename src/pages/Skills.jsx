@@ -225,21 +225,13 @@ export default function Skills() {
   }, []);
 
   const skillsData = [
-    {
-      title: 'Infrastructure & AD Security',
-      icon: <Shield size={42} strokeWidth={1.5} />,
-      subs: ['Active Directory Attacks (DCSync)', 'Internal Network Pivoting', 'Lateral Movement', 'Privilege Escalation']
-    },
+
     {
       title: 'Web Application Security',
       icon: <Globe size={42} strokeWidth={1.5} />,
       subs: ['OWASP Top 10 Standards', 'Authentication & Auth Testing', 'Security Misconfigurations']
     },
-    {
-      title: 'Offensive Operations',
-      icon: <Zap size={42} strokeWidth={1.5} />,
-      subs: ['Red Team Methodologies', 'Detection Evasion', 'Post-Exploitation', 'Ethical Hacking']
-    },
+  
     {
       title: 'Vulnerability Management',
       icon: <Cpu size={42} strokeWidth={1.5} />,
@@ -255,6 +247,7 @@ export default function Skills() {
       icon: <PenTool size={42} strokeWidth={1.5} />,
       subs: ['Kali Linux / Windows OS Expert', 'Technical Pentest Reporting', 'Proof-of-Concept (PoC)', 'Incident Documentation']
     }
+    
   ];
 
   return (

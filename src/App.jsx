@@ -159,10 +159,10 @@ function App() {
 
   const handleDownload = (e) => {
     e.preventDefault();
-    const fileUrl = "/files/Resume_sardor.pdf";
+    const fileUrl = "/files/Resume_sardor.docx";
     const link = document.createElement("a");
     link.href = fileUrl;
-    link.setAttribute("download", "Resume_Sardor.pdf");
+    link.setAttribute("download", "Resume_Sardor.docx");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -373,7 +373,7 @@ function App() {
                   <FaInstagram /> <span>Instagram</span>
                 </SocialLink>
 
-                <SocialLink href="https://t.me/callmethedeep" target="_blank">
+                <SocialLink href="https://t.me/wsync" target="_blank">
                    <FaTerminal /> <span>Telegram</span>
                 </SocialLink>
               </SocialUplink>
@@ -383,7 +383,7 @@ function App() {
 
           {/* ASCII Art Column */}
           <div className="col-lg-5 order-1 order-lg-2">
-            <motion.div
+            <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 }}

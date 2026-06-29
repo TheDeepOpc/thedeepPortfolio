@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { 
-  Shield, Target, Eye, AlertTriangle, Search, Bug, 
+import {
+  Shield, Target, Eye, AlertTriangle, Search, Bug,
   Terminal, Activity, Hexagon
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -83,34 +83,13 @@ const PhotoContainer = styled(motion.div)`
   z-index: 1;
 
   .main-img {
-    width: 100%;
-    filter: grayscale(1) contrast(1.1);
-    border: 1px solid #222;
     position: relative;
     z-index: 2;
   }
 
-  /* Kiber ramka elementlari */
-  &::before {
-    content: "";
-    position: absolute;
-    top: -15px; right: -15px;
-    width: 100px; height: 100px;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
-    z-index: 3;
-    animation: ${framePulse} 2s infinite;
-  }
 
-  .scan-effect {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 2px;
-    background: #fff;
-    box-shadow: 0 0 15px #fff;
-    z-index: 4;
-    animation: ${scanline} 3s linear infinite;
-    opacity: 0.5;
-  }
+
+ 
 `;
 
 const DataOverlay = styled.div`
@@ -127,8 +106,6 @@ export default function About() {
   const services = [
     { icon: <Target />, title: "Penetration Testing", desc: "Network, web, and app assessment via industry-standard methodologies." },
     { icon: <Search />, title: "Vulnerability Assessment", desc: "Automated/manual scanning, risk prioritization, and remediation." },
-    { icon: <Shield />, title: "Red Team Operations", desc: "Advanced persistent threat simulation and attack chain execution." },
-    { icon: <Bug />, title: "Exploit Development", desc: "Custom PoC development and deep vulnerability research." },
     { icon: <Eye />, title: "Security Auditing", desc: "Code review, configuration auditing, and compliance assessment." },
     { icon: <AlertTriangle />, title: "Incident Response", desc: "Digital forensics, malware analysis, and breach investigation." }
   ];
@@ -137,7 +114,7 @@ export default function About() {
     <Section>
       <div className="container">
         <div className="row g-5 align-items-center">
-          
+
           {/* CHAP TARAF: MA'LUMOTLAR */}
           <div className="col-lg-7 order-2 order-lg-1">
             <TitleWrapper
@@ -146,17 +123,16 @@ export default function About() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <motion.span 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 style={{ fontSize: '0.7rem', color: '#555', letterSpacing: '4px' }}
               >
                 [ OPERATOR_PROFILE_DECRYPTED ]
               </motion.span>
               <h1>SARDOR <br /> <span>SHOAKBAROV</span></h1>
               <p style={{ marginTop: '20px', color: '#888', maxWidth: '600px', lineHeight: '1.7' }}>
-                A dedicated penetration tester with deep expertise in offensive security methodologies, 
-                exploit development, and vulnerability research. Focusing on identifying real-world attack vectors.
+                A skilled cybersecurity professional experienced in assessing web application security and identifying security gaps. Adept at analyzing threat vectors and supporting incident response efforts to ensure robust system protection
               </p>
             </TitleWrapper>
 
@@ -181,22 +157,11 @@ export default function About() {
           {/* O'NG TARAF: RASM */}
           <div className="col-lg-5 order-1 order-lg-2">
             <PhotoContainer
-              initial={{ opacity: 0, scale: 0.9, x: 50 }}
-              whileInView={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
             >
               <DataOverlay>RE_TEAM_OPERATOR_v8</DataOverlay>
-              <div className="scan-effect" />
-              <img src={Photo} alt="Sardor S." className="main-img" />
-              
-              <div style={{ 
-                marginTop: '20px', 
-                borderLeft: '1px solid #222', 
-                paddingLeft: '15px' 
-              }}>
-               
-              </div>
+              <img  width={"500px"} src={Photo} alt="Sardor S." className="main-img" />
+
+           
             </PhotoContainer>
           </div>
 

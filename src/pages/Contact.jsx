@@ -257,7 +257,7 @@ export default function Contact() {
             <p>Security_Research</p>
           </SocialCard>
 
-          <SocialCard href="https://t.me/callmethedeep" target="_blank" variants={itemVariants}>
+          <SocialCard href="https://t.me/wsync" target="_blank" variants={itemVariants}>
             <Send />
             <h3>Telegram</h3>
             <p>Encrypted_Chat</p>
