@@ -4,9 +4,11 @@
 
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import Image from "./assets/photo.png"
 import { motion } from 'framer-motion';
 import { FaDownload, FaFingerprint, FaWifi, FaGithub, FaLinkedin, FaInstagram, FaTerminal } from 'react-icons/fa';
-
+import { BiBorderRadius } from 'react-icons/bi';
+import "./App.css"
 // --- Animatsiyalar ---
 const glitchAnim = keyframes`
   0% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.5deg); }
@@ -321,8 +323,7 @@ function App() {
                 transition={{ duration: 0.6 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#00ff41', marginBottom: '10px' }}>
-                  <FaFingerprint size={14} />
-                  <span style={{ fontSize: '0.6rem', letterSpacing: '3px' }}>IDENTITY_CONFIRMED</span>
+                 
                 </div>
                 <GlitchText>TheDEEP_</GlitchText>
               </motion.div>
@@ -331,7 +332,7 @@ function App() {
               <DataGrid>
                 {[
                   { label: "Operator", value: "Sardor S.", delay: 0.3 },
-                  { label: "Focus", value: "Cyber Security", delay: 0.4 },
+                  { label: "Role", value: "Cyber Security", delay: 0.4 },
                   { label: "Network", value: "Stable", delay: 0.5 },
                 ].map((item, index) => (
                   <DataFragment 
@@ -389,7 +390,7 @@ function App() {
               transition={{ delay: 0.5 }}
               style={{ display: 'flex', justifyContent: 'center' }}
             >
-              <AsciiContainer>{randomArt}</AsciiContainer>
+              <img className='mainphoto' width={"100%"} src={Image} alt="" />
             </motion.div>
           </div>
         </div>
