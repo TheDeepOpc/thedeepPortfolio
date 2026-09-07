@@ -131,8 +131,11 @@ export default function About() {
                 [ OPERATOR_PROFILE_DECRYPTED ]
               </motion.span>
               <h1>SARDOR <br /> <span>SHOAKBAROV</span></h1>
+              <p style={{ fontSize: '0.7rem', color: '#555', letterSpacing: '3px', marginTop: '10px' }}>
+                THEDEEP // Ethical Hacker & Pentester
+              </p>
               <p style={{ marginTop: '20px', color: '#888', maxWidth: '600px', lineHeight: '1.7' }}>
-                A skilled cybersecurity professional experienced in assessing web application security and identifying security gaps. Adept at analyzing threat vectors and supporting incident response efforts to ensure robust system protection
+                Cybersecurity Specialist in Uzbekistan — pentester, ethical hacker, and web app security assessor. Experienced in identifying threats and strengthening system defenses.
               </p>
             </TitleWrapper>
 

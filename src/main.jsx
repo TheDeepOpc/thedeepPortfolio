@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import About from './pages/About.jsx'
-import Cert from './pages/Cert.jsx'
 import Contact from './pages/Contact.jsx'
 import AOS from "aos"
 import "aos/dist/aos.css"
@@ -24,10 +23,9 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/about" element={<About />} />
-        <Route path="/certificates" element={<Cert />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/news" element={<News />} />
-<Route path="/news/:id" element={<ArticleDetail />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/news/:id" element={<ArticleDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/skills" element={<Skills />} />
       </Routes>

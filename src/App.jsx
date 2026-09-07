@@ -5,9 +5,10 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Image from "./assets/photo.png"
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaDownload, FaFingerprint, FaWifi, FaGithub, FaLinkedin, FaInstagram, FaTerminal } from 'react-icons/fa';
 import { BiBorderRadius } from 'react-icons/bi';
+import LoadingScreen from './components/LoadingScreen';
 import "./App.css"
 // --- Animatsiyalar ---
 const glitchAnim = keyframes`
@@ -157,6 +158,7 @@ const AsciiContainer = styled.pre`
 
 // --- Komponent ---
 function App() {
+  const [loading, setLoading] = useState(true);
   const [randomArt, setRandomArt] = useState("");
 
   const handleDownload = (e) => {
@@ -311,7 +313,12 @@ function App() {
   }, []);
 
   return (
-    <MainContainer className=''>
+    <>
+      <AnimatePresence>
+        {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
+      <MainContainer className=''>
       <div className="container mt-5">
         <div className="row align-items-center">
           <div className="col-lg-7 order-2 order-lg-1">
@@ -370,7 +377,7 @@ function App() {
                   <FaLinkedin /> <span>LINKEDIN</span>
                 </SocialLink>
                 
-                <SocialLink href="https://instagram.com/thedeep" target="_blank">
+                <SocialLink href="https://instagram.com/deepopc" target="_blank">
                   <FaInstagram /> <span>Instagram</span>
                 </SocialLink>
 
@@ -396,6 +403,7 @@ function App() {
         </div>
       </div>
     </MainContainer>
+    </>
   );
 }
 
